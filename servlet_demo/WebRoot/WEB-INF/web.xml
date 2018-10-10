@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!-- 全局初始化参数配置：context-param 上下文参数 -->
+    <context-param>
+         <param-name>username</param-name>
+         <param-value>liyan</param-value>
+    </context-param>
+   
+
+	<!-- servlet声明周期演示 -->
+	<servlet>
+		<servlet-name>lifecycle</servlet-name>
+		<servlet-class>day01.ServletLifecycle</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>lifecycle</servlet-name>
+		<url-pattern>/servletLife</url-pattern>
+	</servlet-mapping>
+
+	<!-- HttpServletRequest接口中的重要方法演示 小写 变 大写 ctrl + shift + x -->
+	<servlet>
+		<servlet-name>request</servlet-name>
+		<servlet-class>day01.HttpServletRequestTest</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>request</servlet-name>
+		<url-pattern>/request</url-pattern>
+	</servlet-mapping>
+
+	<!-- 用户模块的Servlet -->
+	<servlet>
+		<servlet-name>userServlet</servlet-name>
+		<servlet-class>day01.UserServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>userServlet</servlet-name>
+		<url-pattern>/user/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- JSTLServlet -->
+	<servlet>
+		<servlet-name>JSTLServlet</servlet-name>
+		<servlet-class>jstl.JSTLServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JSTLServlet</servlet-name>
+		<url-pattern>/jstl</url-pattern>
+	</servlet-mapping>
+	
+	<!-- ServletContext演示 -->
+	<!-- 
+	<servlet>
+		<servlet-name>ServletContextTest</servlet-name>
+		<servlet-class>day01.ServletContextTest</servlet-class>
+		
+		
+		     局部初始化参数
+		     某个Servlet的初始化参数配置:init-param
+		     param-name:初始化参数的名称(我们自己定)  key ==>  此key 一定要和 application.getInitParameter("值"); 保持一致
+		     param-value:初始化参数的值                              value
+		
+		<init-param>
+		     <param-name>encoding</param-name>
+		     <param-value>utf-8</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletContextTest</servlet-name>
+		<url-pattern>/servletContext</url-pattern>
+	</servlet-mapping> 
+	-->
+	
+    <!-- 黑名单过滤器 -->
+	<filter>
+         <filter-name>blackNameListFilter</filter-name>
+         <filter-class>filter.BlackNameListFilter</filter-class>
+         
+         <!-- 配置黑名单 -->
+         <init-param>
+              <param-name>blackNameList</param-name>
+              <param-value>127.0.0.1</param-value>
+         </init-param>
+    </filter>
+    
+    <!-- 自己实现  POST请求 字符编码过滤器:  工作中   字符编码过滤器  由 Spring 框架提供 -->
+	<!-- <filter>
+	     <filter-name>character</filter-name>
+	     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	     
+	     配置字符编码过滤器 初始化参数: 字符编码
+	     <init-param>
+	          <param-name>encoding</param-name>
+	          <param-value>utf-8</param-value>
+	     </init-param>
+	</filter>
+    
+    <filter-mapping>
+	    <filter-name>character</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+    <filter-mapping>
+        <filter-name>blackNameListFilter</filter-name>
+        <url-pattern>/servletContext</url-pattern>
+    </filter-mapping> -->
+	
+	
+	
+	
+
+	
+
+	
+</web-app>
